@@ -11,27 +11,30 @@ import UIKit
 // MARK: - PrintBugViewController: UIViewController
 
 class PrintBugViewController: UIViewController {
-
+    
     // MARK: Properties
     
     let bugFactory = BugFactory.sharedInstance()
     let maxBugs = 100
     let moveDuration = 3.0
-    let disperseDuration = 1.0    
+    let disperseDuration = 1.0
     var bugs = [UIImageView]()
-
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap))
-        view.addGestureRecognizer(singleTapRecognizer)                
+        view.addGestureRecognizer(singleTapRecognizer)
     }
-
+    
     // MARK: Bug Functions
     
     func addBugToView() {
-        print("addBugToView")
+        //adding the ability to choose the best printing method
+//        print("addBugToView")
+//        print(description)
+        print(debugDescription)
         if bugs.count < maxBugs {
             let newBug = bugFactory.createBug()
             bugs.append(newBug)
@@ -39,7 +42,7 @@ class PrintBugViewController: UIViewController {
             moveBugsAnimation()
         }
     }
-
+    
     func emptyBugsFromView() {
         for bug in self.bugs {
             bug.removeFromSuperview()
@@ -86,6 +89,25 @@ extension PrintBugViewController {
     @objc func handleSingleTap(_ recognizer: UITapGestureRecognizer) {
         print("handleSingleTap")
         addBugToView()
+    }
+}
+
+
+// MARK: - CustomStringConvertible and CustomDebugStringConvertible
+
+extension PrintBugViewController {
+    override var description: String {
+        return "PrintBugViewController contains \(bugs.count)"
+    }
+    
+    override var debugDescription: String {
+        var index = 0
+        var debugString = "PrintBugViewController contains \(bugs.count)"
+        for bug in bugs {
+            debugString = debugString + " Bug \(index) with current location \(bug.frame)"
+            index += 1
+        }
+        return debugString
     }
 }
 
