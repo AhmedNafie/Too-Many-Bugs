@@ -35,6 +35,7 @@ class PrintBugViewController: UIViewController {
         if bugs.count < maxBugs {
             let newBug = bugFactory.createBug()
             bugs.append(newBug)
+            view.addSubview(newBug)
             moveBugsAnimation()
         }
     }
