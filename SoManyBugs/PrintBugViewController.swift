@@ -34,7 +34,7 @@ class PrintBugViewController: UIViewController {
         //adding the ability to choose the best printing method
 //        print("addBugToView")
 //        print(description)
-        print(debugDescription)
+//        print(debugDescription)
         if bugs.count < maxBugs {
             let newBug = bugFactory.createBug()
             bugs.append(newBug)
